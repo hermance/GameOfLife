@@ -9,7 +9,7 @@ public class GameOfLife {
     public static void main(String[] args) {
         // we populate our grid of 7*7 with those starting cells
         // a cell at true is alive, a cell at false is dead
-        /*
+
         boolean[][] grid = new boolean[][]{
                 {true, true, false, true, false, false, false},
                 {true, false, true, false, false, false, false},
@@ -19,17 +19,13 @@ public class GameOfLife {
                 {true, true, false, false, false, true, true},
                 {true, true, true, false, false, true, true}
         };
-        */
-        boolean[][] grid = new boolean[][]{
-                {true, true, false},
-                {true, false, true},
-                {true, false, false},
-        };
 
         // we launch the game of life by initializing it
         GameOfLife game = new GameOfLife(grid);
 
         // we will calculate (and display) the grid for four next generations
+        game.tick();
+        game.tick();
         game.tick();
         game.tick();
         game.tick();
@@ -74,11 +70,47 @@ public class GameOfLife {
         this.generation ++;
         System.out.println("Tick ! This is generation number " + this.generation);
 
-        // we apply the four rules of this game of life
-        applyUnderpopulation();
-        applyOvercrowding();
-        applySurviving();
-        applyResuscitation();
+        int width = this.grid[0].length;
+        int length = this.grid[1].length;
+        boolean[][] newGrid = new boolean[width][length];
+
+        // we will explore our grid cell by cell, line by line
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < length; j++) {
+                boolean wasModified = false;
+
+                // this is the cell we are looking at
+                boolean currentCell = this.grid[i][j];
+                // those are the neighbour cell that we want to check to apply the rule
+                int aliveCloser = getAliveNeighbours(i, j, width, length);
+
+                if(currentCell && aliveCloser < 2){
+                    // Rule 1 : Any live cell with fewer than two live neighbours dies, as if caused by underpopulation
+                    newGrid[i][j] = false;
+                    wasModified = true;
+                }
+                if(currentCell && aliveCloser > 3){
+                    // Rule 2 : Any live cell with more than three live neighbours dies, as if by overcrowding
+                    newGrid[i][j] = false;
+                    wasModified = true;
+                }
+                if(currentCell && (aliveCloser == 2 || aliveCloser == 3)){
+                    // Rule 3 : Any live cell with two or three live neighbours lives on to the next generation
+                    newGrid[i][j] = true;
+                    wasModified = true;
+                }
+                if(!currentCell && aliveCloser == 3){
+                    // Rule 4 : Any dead cell with exactly three live neighbours becomes a live cell.
+                    newGrid[i][j] = true;
+                    wasModified = true;
+                }
+                if(!wasModified){
+                    // if no rule has been applied the cell stays at her state
+                    newGrid[i][j] = this.grid[i][j];
+                }
+            }
+        }
+        this.grid = newGrid;
 
         // we want to see what that generation is like (new alive and dead cells)
         displayGrid();
@@ -111,43 +143,6 @@ public class GameOfLife {
             }
         }
         return aliveCloser;
-    }
-
-    // Rule 1 : Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.
-    private void applyUnderpopulation(){
-        int width = this.grid[0].length;
-        int length = this.grid[1].length;
-        boolean[][] newGrid = new boolean[width][length];
-
-        // we will explore our grid cell by cell, line by line
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < length; j++) {
-                // this is the cell we are looking at
-                boolean currentCell = this.grid[i][j];
-                // those are the neighbour cell that we want to check to apply the rule
-                int aliveCloser = getAliveNeighbours(i, j, width, length);
-                if(currentCell && aliveCloser < 2){
-                    // that cell will die of underpopulation
-                    newGrid[i][j] = false;
-                }else{
-                    // if this rule doesn't apply, we keep the old state (alive or dead)
-                    newGrid[i][j] = this.grid[i][j];
-                }
-            }
-        }
-        this.grid = newGrid;
-    }
-
-    private void applyOvercrowding(){
-
-    }
-
-    private void applySurviving(){
-
-    }
-
-    private void applyResuscitation(){
-
     }
 
 }
