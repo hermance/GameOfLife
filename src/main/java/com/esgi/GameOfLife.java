@@ -23,7 +23,7 @@ public class GameOfLife {
         // we launch the game of life by initializing it
         GameOfLife game = new GameOfLife(grid);
 
-        // we will calculate (and display) the grid for four next generations
+        // we will calculate (and display) the grid for 5 next generations
         game.tick();
         game.tick();
         game.tick();
@@ -77,11 +77,12 @@ public class GameOfLife {
         // we will explore our grid cell by cell, line by line
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < length; j++) {
+                // with that boolean we will know if a cell was modified by one of the laws
                 boolean wasModified = false;
 
                 // this is the cell we are looking at
                 boolean currentCell = this.grid[i][j];
-                // those are the neighbour cell that we want to check to apply the rule
+                // those are the neighbour cells that we want to check to apply the rule
                 int aliveCloser = getAliveNeighbours(i, j, width, length);
 
                 if(currentCell && aliveCloser < 2){
@@ -105,7 +106,8 @@ public class GameOfLife {
                     wasModified = true;
                 }
                 if(!wasModified){
-                    // if no rule has been applied the cell stays at her state
+                    // if no rule has been applied
+                    // the cell of the new grid is initialize at the state of the previous grid (alive or dead)
                     newGrid[i][j] = this.grid[i][j];
                 }
             }
