@@ -8,5 +8,5 @@ Feature: Overcrowding
     And an alive cell at 1x0
     And a live cell at 0x2
     When we calculate the next generation of the grid for overcrowding
-    Then the cell at 0x1 dies
+    Then the cell at 0x1 dies of overcrowding
 

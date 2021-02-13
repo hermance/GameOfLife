@@ -9,7 +9,6 @@ import org.junit.Assert;
 
 public class Overcrowding {
 
-
     private GameOfLife game;
     private boolean[][] grid;
 
@@ -55,8 +54,8 @@ public class Overcrowding {
     }
 
 
-    @Then("the cell at 0x1 dies")
-    public void cellAtZeroByOneDies(){
+    @Then("the cell at 0x1 dies of overcrowding")
+    public void cellAtZeroByOneDiesOfOverCrowding(){
         grid = new boolean[][]{
                 {true, false, true},
                 {true, false, true},

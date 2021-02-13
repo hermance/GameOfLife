@@ -39,7 +39,7 @@ public class Underpopulation {
     }
 
     @Then("both of the cells die of underpopulation")
-    public void bothCellsDie(){
+    public void bothCellsDieOfUnderpopulation(){
         grid = new boolean[][]{
                 {false, false, false, false, false},
                 {false, false, false, false, false},
