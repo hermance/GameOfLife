@@ -66,7 +66,7 @@ public class GameOfLife {
     }
 
     // this represents a tick or jump to the next generation of the grid
-    private void tick() {
+    public void tick() {
         this.generation ++;
         System.out.println("Tick ! This is generation number " + this.generation);
 
@@ -147,4 +147,7 @@ public class GameOfLife {
         return aliveCloser;
     }
 
+    public boolean[][] getGrid() {
+        return grid;
+    }
 }
