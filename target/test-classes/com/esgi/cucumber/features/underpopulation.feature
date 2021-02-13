@@ -4,6 +4,6 @@ Feature: Underpopulation
     Given a grid of 5 by 5
     And a live cell at 1x1
     And a live cell at 1x2
-    When we calculate the next generation of the grid
+    When we calculate the next generation of the grid for underpopulation
     Then both of the cells die of underpopulation
 

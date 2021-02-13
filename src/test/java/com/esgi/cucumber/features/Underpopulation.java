@@ -32,8 +32,8 @@ public class Underpopulation {
         this.grid[1][2] = true;
     }
 
-    @When("we calculate the next generation of the grid")
-    public void calculateNextGenerationOfGrid(){
+    @When("we calculate the next generation of the grid for underpopulation")
+    public void calculateNextGenerationOfGridForUnderpopulation(){
         this.game = new GameOfLife(grid);
         this.game.tick();
     }
