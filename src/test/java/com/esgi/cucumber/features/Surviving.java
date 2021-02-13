@@ -50,7 +50,7 @@ public class Surviving {
 
 
     @Then("the cells at 3x2, 2x3 and 3x3 survive")
-    public void cellAtTrheeByTwoAndTwoByThreeAndThreeByThreeSurvive(){
+    public void cellAtThreeByTwoAndTwoByThreeAndThreeByThreeSurvive(){
         grid = new boolean[][]{
                 {false, false, false, false},
                 {false, false, false, false},
