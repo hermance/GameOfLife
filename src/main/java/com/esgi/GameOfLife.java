@@ -40,12 +40,12 @@ public class GameOfLife {
 
     // this function allows to display our global grid at any given time and state
     private void displayGrid(){
-        for (int i = 0; i < this.grid[0].length; i++)
+        for (int j = 0; j <  this.grid[1].length; j++) // lines
         {
-            // separator between cells for more visibility
-            System.out.print(" | ");
-            for (int j = 0; j <  this.grid[1].length; j++)
+            for (int i = 0; i < this.grid[0].length; i++) // cells
             {
+                // separator between cells for more visibility
+                System.out.print(" | ");
                 // we go through all our cells
                 // and display if they are alive or not
                 if(this.grid[i][j]){
@@ -55,8 +55,10 @@ public class GameOfLife {
                     // the cell is dead (at this position, we have a false boolean)
                     System.out.print("O");
                 }
-                // separator between cells for more visibility
-                System.out.print(" | ");
+                if(i == this.grid[0].length - 1 ){
+                    // separator between cells for more visibility
+                    System.out.print(" | ");
+                }
             }
             // jumps a line
             System.out.println();
@@ -75,8 +77,8 @@ public class GameOfLife {
         boolean[][] newGrid = new boolean[width][length];
 
         // we will explore our grid cell by cell, line by line
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < length; j++) {
+        for (int j = 0; j < length; j++) { // lines
+            for (int i = 0; i < width; i++) { //cells
                 // with that boolean we will know if a cell was modified by one of the laws
                 boolean wasModified = false;
 
